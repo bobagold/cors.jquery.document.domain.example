@@ -6,11 +6,11 @@
 <body>
 <script type="text/javascript">
 	var console_log = function() {
-		if (console && console.log && console.log.apply)
+		if (typeof(console) !== 'undefined' && console.log && console.log.apply)
 			console.log.apply(console, arguments);
 	}
 	var console_assert = function() {
-		if (console && console.assert && console.assert.apply)
+		if (typeof(console) !== 'undefined' && console.assert && console.assert.apply)
 			console.assert.apply(console, arguments);
 	}
 	console_log("www");
