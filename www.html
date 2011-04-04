@@ -1,0 +1,44 @@
+<html>
+<head>
+<script type="text/javascript"
+				src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+	var console_log = function() {
+		if (console && console.log && console.log.apply)
+			console.log.apply(console, arguments);
+	}
+	var console_assert = function() {
+		if (console && console.assert && console.assert.apply)
+			console.assert.apply(console, arguments);
+	}
+	console_log("www");
+	var ajax_domain = 'ajax.' + document.domain;
+	document.domain = document.domain;
+	doAjax = function($, $$) {
+		$$.ajax({
+			url: 'http://' + ajax_domain + '/example/ajax.html',
+			error : function() {
+				console_log('error');
+			},
+			success : function(payload) {
+				console_assert(payload == 'ajax data');
+				$("<div>").text(payload).appendTo($("body"));
+				console_log('success', payload, arguments);
+			},
+			complete : function() {
+				console_log('complete');
+			}
+		});
+	};
+//	doAjax($, $);
+	$("body").append($("<iframe>", {
+		src : 'http://' + ajax_domain + '/example/iframe.html?rand=' + Math.random()
+	}).load(function() {
+		console_log("iframe loaded", arguments, window.frames[0]);
+		doAjax($, window.frames[0].$);
+	}));
+</script>
+</body>
+</html>
