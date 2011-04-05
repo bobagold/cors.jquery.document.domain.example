@@ -1,1 +1,15 @@
 cross-origin ajax with jquery using document.domain example
+xss ajax call
+
+www.html makes ajax call to ajax.html on subdomain
+supposed site structure:
+	http://example.com/example/www.html
+	http://ajax.example.com/example/ajax.html
+	http://ajax.example.com/example/iframe.html
+
+tested in ie7,chrome10,ff3.6
+
+other approaches:
+Access-Control-Allow-* headers
+crossdomain.xml without flash
+crossdomain.xml with flash
